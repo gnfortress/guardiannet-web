@@ -1,84 +1,52 @@
-/* Custom styles for Guardiannet */
+@import "tailwindcss";
 
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+}
+body {
+  background-color: #09090b; /* zinc-950 */
+  color: #fff;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
-
 ::-webkit-scrollbar-track {
   background: #0a0a0a;
 }
-
 ::-webkit-scrollbar-thumb {
   background: #333;
   border-radius: 4px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
 
 /* Animation keyframes */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
-
 @keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
-
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
-.animate-fade-in-up {
-  animation: fadeInUp 0.8s ease-out forwards;
-}
+.animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+.animate-fade-in { animation: fadeIn 1s ease-out forwards; }
+.animate-pulse-slow { animation: pulse 3s ease-in-out infinite; }
+.animate-float { animation: float 6s ease-in-out infinite; }
 
-.animate-fade-in {
-  animation: fadeIn 1s ease-out forwards;
-}
-
-.animate-pulse-slow {
-  animation: pulse 3s ease-in-out infinite;
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-/* Staggered animation delays */
 .delay-100 { animation-delay: 0.1s; }
 .delay-200 { animation-delay: 0.2s; }
 .delay-300 { animation-delay: 0.3s; }
@@ -101,14 +69,15 @@ html {
 }
 
 /* Glow effect */
-.glow {
-  box-shadow: 0 0 40px rgba(0, 212, 255, 0.15);
-}
+.glow { box-shadow: 0 0 40px rgba(0, 212, 255, 0.15); }
 
 /* Grid background pattern */
 .grid-bg {
-  background-image: 
+  background-image:
     linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   background-size: 50px 50px;
 }
+
+/* 본문(블로그/솔루션) 가독성 보조 */
+.prose-gn p { line-height: 1.85; }

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="100%" stop-color="#0f1822"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00d4ff"/>
+      <stop offset="100%" stop-color="#0099ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="980" cy="120" r="260" fill="#00d4ff" opacity="0.08"/>
+  <circle cx="220" cy="540" r="220" fill="#0099ff" opacity="0.08"/>
+  <g transform="translate(96,150)">
+    <path d="M40 0 L78 16 L78 42 C78 68 60 84 40 92 C20 84 2 68 2 42 L2 16 Z" fill="url(#cyan)"/>
+    <text x="40" y="60" font-family="Arial, sans-serif" font-size="46" font-weight="bold" fill="#0a0a0a" text-anchor="middle">G</text>
+  </g>
+  <text x="96" y="330" font-family="'Malgun Gothic', Arial, sans-serif" font-size="68" font-weight="bold" fill="#ffffff">가디언넷</text>
+  <text x="96" y="410" font-family="'Malgun Gothic', Arial, sans-serif" font-size="40" font-weight="bold" fill="url(#cyan)">Deep Security · APT 대응 전문기업</text>
+  <text x="96" y="470" font-family="'Malgun Gothic', Arial, sans-serif" font-size="28" fill="#a1a1aa">5,000+ 클라우드 워크로드 · 150+ APT 구축 · 16년</text>
+</svg>
