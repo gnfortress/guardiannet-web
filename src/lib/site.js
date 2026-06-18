@@ -8,7 +8,7 @@ export const SITE_URL = 'https://www.guardiannet.co.kr'
 // Google Search Console 소유권 확인용 토큰.
 // Search Console에서 "HTML 태그" 방식 선택 → content="..." 값만 여기에 붙여넣으면
 // 전 페이지 <head>에 자동 삽입됨. (빈 문자열이면 메타태그 미출력)
-export const GOOGLE_SITE_VERIFICATION = ''
+export const GOOGLE_SITE_VERIFICATION = 'nyeiu5scN32N41BVlDejcGqxsx6EfIFQRYN5OP0r3Ss'
 // (선택) 네이버 서치어드바이저 소유권 확인 토큰
 export const NAVER_SITE_VERIFICATION = ''
 
