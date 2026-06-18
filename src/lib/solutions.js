@@ -128,17 +128,23 @@ export const SOLUTIONS = {
         source: 'Trend Micro',
       },
       {
-        src: '/vision-one/edr-features.png',
-        alt: 'Trend Micro Vision One EDR 도입효과 및 특장점 — CTI 기반 탐지, ASRM, 자동 대응 Playbook 등 8가지',
-        caption: '도입효과 & 특장점 — CTI 기반 위협 탐지, EDR 시각화, 공격 표면 위험 관리(ASRM), 자동 대응 Playbook 등.',
-        source: 'Trend Micro',
-      },
-      {
         src: '/vision-one/visibility.png',
         alt: 'Trend Micro Vision One 전체 가시성 구성도 — SWG/CASB(인터넷 접근), ZTNA(사설 접근), 클라우드 앱·데이터센터',
         caption: 'Vision One은 SWG·CASB·ZTNA를 통해 사용자·단말의 인터넷/사설 접근을 한 화면에서 가시화합니다.',
         source: 'Trend Micro',
       },
+    ],
+    // 도입효과 & 특장점 (네이티브 다크 테마로 렌더 — 마케팅 카드 이미지 대체)
+    highlightsTitle: '도입효과 & 특장점',
+    highlights: [
+      { t: 'CTI 기반 자동 탐지', d: 'MITRE TTPs·위협 인텔리전스(CTI) 기반 의심 행위 탐지 룰로 자동 알람 생성' },
+      { t: 'Companion AI 분석', d: '생성형 Chat AI로 인시던트 분석을 빠르고 쉽게 수행' },
+      { t: '폭넓은 대응 범위', d: '업계에서 가장 다양한 대응(Response) 옵션 제공' },
+      { t: '위협 시각화(EDR)', d: '위협 경로·영향도·상관관계가 필요한 경고를 시각화' },
+      { t: '자산 위험 수치화(ASRM)', d: '조직 자산의 위험도를 수치화하고 즉각적인 위험완화 구현' },
+      { t: '측면 이동 차단', d: 'Lateral Movement를 가상패치로 효과적으로 예방·차단' },
+      { t: '자동 대응 Playbook', d: '위협 레벨·의심 여부에 따라 자동으로 선별·대응' },
+      { t: '자산 위험도 가시화', d: '디바이스·계정 등 조직 자산 위험도를 수치화해 제시' },
     ],
     sections: [
       {

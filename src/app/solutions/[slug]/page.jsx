@@ -129,6 +129,28 @@ export default function SolutionPage({ params }) {
         ))}
       </article>
 
+      {/* 도입효과 & 특장점 (네이티브 그리드 — highlights가 있는 솔루션만) */}
+      {s.highlights && s.highlights.length > 0 && (
+        <section className="px-6 py-12 max-w-5xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
+            {s.highlightsTitle || '도입효과 & 특장점'}
+          </h2>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {s.highlights.map((h, i) => (
+              <div key={h.t} className="glass-card rounded-xl p-5 flex gap-4">
+                <div className="shrink-0 w-8 h-8 rounded-lg bg-cyan-500/15 text-cyan-400 font-bold flex items-center justify-center text-sm">
+                  {i + 1}
+                </div>
+                <div>
+                  <div className="font-semibold text-white mb-1">{h.t}</div>
+                  <div className="text-sm text-zinc-400 leading-relaxed">{h.d}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* FAQ */}
       <section className="px-6 py-12">
         <Faq faq={s.faq} />

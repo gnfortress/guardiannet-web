@@ -1,5 +1,6 @@
 import Breadcrumbs from '@/components/Breadcrumbs'
 import CtaBand from '@/components/CtaBand'
+import { METRICS } from '@/lib/site'
 
 export const metadata = {
   title: '구축사례 — 금융·공공·기업 보안 구축',
@@ -31,6 +32,27 @@ const CASES = [
     solution: ['Deep Security 단일 정책 멀티 클라우드 적용', '오토스케일 자동 정책 배포', 'GnFortress 점검 자동화 연계'],
     result: ['클라우드·온프레미스 통합 관리', '확장 시 자동 보안 적용', '점검 자동화'],
   },
+  {
+    sector: '금융',
+    title: '금융권 EDR/XDR 도입 — SaaS형 통합 가시성',
+    challenge: '단말·서버 침해 가시성 강화 및 SaaS 활용 확대에 맞춘 보안 관제 필요',
+    solution: ['Vision One EDR/XDR 도입 검토·PoC', '엔드포인트·서버·이메일 상관분석 구성', 'Companion AI 활용 인시던트 분석'],
+    result: ['침해·확산 행위 가시성 확보', '알럿 통합으로 대응 속도 향상', '관제 운영 체계 정립'],
+  },
+  {
+    sector: '기업',
+    title: 'ISMS-P 인증 대응 — 서버 보안 통제 자동화',
+    challenge: '인증 심사의 접근통제·로그·무결성·취약점 통제 증적 확보',
+    solution: ['통제 항목별 정책 설계', '무결성·로그 검사 구성', '점검·증적 산출 자동화'],
+    result: ['인증 요건 충족', '심사 증적 자동 산출', '반복 점검 부담 감소'],
+  },
+  {
+    sector: '게임',
+    title: '게임사 대규모 워크로드 랜섬웨어 다층 방어',
+    challenge: '급증하는 서버 워크로드와 랜섬웨어·표적 공격 위협 대응',
+    solution: ['Host IPS·가상 패치로 침투 차단', 'EDR/XDR로 측면 이동 탐지', '무결성 모니터링·백업 복구 체계'],
+    result: ['랜섬웨어 침투·확산 방어', '대규모 워크로드 일괄 관리', '신규 서버 자동 보안 적용'],
+  },
 ]
 
 export default function CasesPage() {
@@ -43,6 +65,19 @@ export default function CasesPage() {
           금융·공공·기업 환경에서 가디언넷이 보안 체계를 구축·운영한 사례입니다.
           (고객 정보 보호를 위해 익명으로 표기합니다.)
         </p>
+
+        <div className="grid grid-cols-3 gap-4 mt-10">
+          {[
+            { n: METRICS.workloads, l: '클라우드 워크로드' },
+            { n: METRICS.aptCustomers, l: 'APT 구축 고객사' },
+            { n: METRICS.years, l: '보안 경력' },
+          ].map((m) => (
+            <div key={m.l} className="glass-card rounded-2xl p-6 text-center">
+              <div className="text-3xl md:text-4xl font-bold gradient-text mb-1">{m.n}</div>
+              <div className="text-zinc-400 text-xs md:text-sm">{m.l}</div>
+            </div>
+          ))}
+        </div>
       </section>
 
       <section className="px-6 pb-12 max-w-5xl mx-auto space-y-6">
