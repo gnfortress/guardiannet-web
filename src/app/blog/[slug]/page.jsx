@@ -4,14 +4,15 @@ import { POSTS, POST_SLUGS, getPost } from '@/lib/blog'
 import { SITE_URL, COMPANY } from '@/lib/site'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import JsonLd from '@/components/JsonLd'
-import { ArrowRightIcon } from '@/components/Icons'
+import { ButtonLink, Container } from '@/components/ui'
 
 export function generateStaticParams() {
   return POST_SLUGS.map((slug) => ({ slug }))
 }
 
-export function generateMetadata({ params }) {
-  const post = getPost(params.slug)
+export async function generateMetadata({ params }) {
+  const { slug } = await params
+  const post = getPost(slug)
   if (!post) return {}
   const path = `/blog/${post.slug}`
   return {
@@ -30,23 +31,24 @@ export function generateMetadata({ params }) {
 }
 
 function Block({ block }) {
-  if (block.h2) return <h2 className="text-2xl font-bold mt-10 mb-4">{block.h2}</h2>
+  if (block.h2) return <h2 className="mb-4 mt-12 text-[24px] font-bold leading-snug tracking-[-0.02em] md:text-[28px]">{block.h2}</h2>
   if (block.ul)
     return (
-      <ul className="space-y-2 my-4">
+      <ul className="my-5 space-y-2.5">
         {block.ul.map((li, i) => (
-          <li key={i} className="text-zinc-300 flex gap-3">
-            <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full mt-2.5 shrink-0" />
+          <li key={i} className="flex gap-3 text-[16.5px] leading-[1.75] text-ink-2">
+            <span className="mt-[0.7em] size-1.5 shrink-0 rounded-full bg-accent" aria-hidden="true" />
             <span>{li}</span>
           </li>
         ))}
       </ul>
     )
-  return <p className="text-zinc-300 mb-4 leading-relaxed">{block.p}</p>
+  return <p className="mb-5 text-[16.5px] text-ink-2">{block.p}</p>
 }
 
-export default function BlogPost({ params }) {
-  const post = getPost(params.slug)
+export default async function BlogPost({ params }) {
+  const { slug } = await params
+  const post = getPost(slug)
   if (!post) notFound()
 
   const path = `/blog/${post.slug}`
@@ -70,48 +72,57 @@ export default function BlogPost({ params }) {
   const related = POSTS.filter((p) => p.slug !== post.slug && p.category === post.category).slice(0, 2)
 
   return (
-    <article className="px-6 pt-16 pb-24 max-w-3xl mx-auto">
+    <>
       <JsonLd data={articleJsonLd} />
-      <Breadcrumbs
-        items={[
-          { name: '홈', href: '/' },
-          { name: '블로그', href: '/blog' },
-          { name: post.title, href: path },
-        ]}
-      />
+      <Container className="py-12 md:py-16">
+        <article className="mx-auto max-w-[720px]">
+          <Breadcrumbs
+            items={[
+              { name: '홈', href: '/' },
+              { name: '블로그', href: '/blog' },
+              { name: post.title, href: path },
+            ]}
+          />
 
-      <div className="flex items-center gap-3 mt-6 mb-4">
-        <span className="px-2 py-0.5 text-xs bg-cyan-500/20 text-cyan-400 rounded-full">{post.category}</span>
-        <time className="text-sm text-zinc-500" dateTime={post.date}>{post.date}</time>
-      </div>
-      <h1 className="text-3xl md:text-4xl font-bold mb-8 leading-tight">{post.title}</h1>
+          <div className="mt-8 flex items-center gap-3 text-[13px] text-ink-3">
+            <span className="text-accent">{post.category}</span>
+            <time dateTime={post.date}>{post.date}</time>
+          </div>
+          <h1 className="mt-3 text-[30px] font-bold leading-[1.3] tracking-[-0.03em] text-balance md:text-[40px]">{post.title}</h1>
+          <p className="mt-5 border-b border-line pb-8 text-[17px] leading-relaxed text-ink">{post.description}</p>
 
-      <div className="prose-gn">
-        {post.body.map((b, i) => <Block key={i} block={b} />)}
-      </div>
-
-      {post.cta && (
-        <div className="glass-card rounded-2xl p-6 mt-10 flex items-center justify-between gap-4 flex-wrap">
-          <p className="text-zinc-300 font-medium">더 자세한 내용이 궁금하신가요?</p>
-          <Link href={post.cta.href} className="inline-flex items-center gap-2 px-5 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-black font-semibold rounded-lg transition-colors">
-            {post.cta.label} <ArrowRightIcon className="w-4 h-4" />
-          </Link>
-        </div>
-      )}
-
-      {related.length > 0 && (
-        <div className="mt-16">
-          <h2 className="text-xl font-bold mb-4">관련 글</h2>
-          <div className="grid sm:grid-cols-2 gap-4">
-            {related.map((r) => (
-              <Link key={r.slug} href={`/blog/${r.slug}`} className="glass-card rounded-xl p-5 hover:border-cyan-500/30 transition-colors">
-                <div className="font-semibold text-white mb-1">{r.title}</div>
-                <div className="text-sm text-zinc-400">{r.description}</div>
-              </Link>
+          <div className="prose-gn mt-8">
+            {post.body.map((b, i) => (
+              <Block key={i} block={b} />
             ))}
           </div>
-        </div>
-      )}
-    </article>
+
+          {post.cta && (
+            <div className="mt-12 flex flex-col gap-4 border-y border-line py-6 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-[16px] font-semibold text-ink">더 자세한 내용이 궁금하신가요?</p>
+              <ButtonLink href={post.cta.href} size="md" arrow>
+                {post.cta.label}
+              </ButtonLink>
+            </div>
+          )}
+
+          {related.length > 0 && (
+            <div className="mt-16">
+              <h2 className="text-[20px] font-bold">관련 글</h2>
+              <ul className="mt-4 border-t border-line">
+                {related.map((r) => (
+                  <li key={r.slug} className="border-b border-line">
+                    <Link href={`/blog/${r.slug}`} className="group block py-5">
+                      <div className="text-[17px] font-semibold text-ink transition-colors group-hover:text-accent">{r.title}</div>
+                      <div className="mt-1 text-[14.5px] leading-relaxed text-ink-2">{r.description}</div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </article>
+      </Container>
+    </>
   )
 }

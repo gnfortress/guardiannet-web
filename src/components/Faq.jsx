@@ -1,7 +1,8 @@
+import { PlusIcon } from '@phosphor-icons/react/dist/ssr'
 import JsonLd from './JsonLd'
 
 // faq: [{ q, a }] — 화면 출력 + FAQPage 구조화 데이터(리치 결과)를 함께 생성
-export default function Faq({ faq, heading = '자주 묻는 질문' }) {
+export default function Faq({ faq, heading = '자주 묻는 질문', id = 'faq' }) {
   if (!faq || faq.length === 0) return null
 
   const jsonLd = {
@@ -15,17 +16,17 @@ export default function Faq({ faq, heading = '자주 묻는 질문' }) {
   }
 
   return (
-    <section className="max-w-3xl mx-auto">
+    <section id={id} className="scroll-mt-24">
       <JsonLd data={jsonLd} />
-      <h2 className="text-3xl font-bold mb-8 text-center">{heading}</h2>
-      <div className="space-y-4">
+      <h2 className="reveal text-[26px] font-bold tracking-[-0.02em] md:text-[32px]">{heading}</h2>
+      <div className="mt-8 border-t border-line-strong">
         {faq.map((f, i) => (
-          <details key={i} className="glass-card rounded-xl p-6 group" open={i === 0}>
-            <summary className="cursor-pointer list-none flex items-start justify-between gap-4 font-semibold text-white">
-              <span>Q. {f.q}</span>
-              <span className="text-cyan-400 transition-transform group-open:rotate-45 shrink-0">+</span>
+          <details key={i} className="group border-b border-line" open={i === 0}>
+            <summary className="flex cursor-pointer items-start justify-between gap-6 py-5 text-[17px] font-semibold leading-snug text-ink transition-colors hover:text-accent md:text-[18px]">
+              <span>{f.q}</span>
+              <PlusIcon size={20} className="faq-icon mt-0.5 shrink-0 text-ink-3 transition-transform duration-300" aria-hidden="true" />
             </summary>
-            <p className="mt-4 text-zinc-400 leading-relaxed">{f.a}</p>
+            <p className="max-w-[68ch] pb-6 text-[15.5px] leading-[1.8] text-ink-2">{f.a}</p>
           </details>
         ))}
       </div>

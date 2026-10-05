@@ -1,83 +1,103 @@
 @import "tailwindcss";
 
-/* Smooth scrolling */
+/* ============================================================================
+   가디언넷 디자인 규칙 (Taste Skill 기준)
+   - 테마: 어두운 단일 테마. 섹션마다 밝기만 살짝 다르게(bg / bg-2), 밝은 섹션 끼워 넣지 않음.
+   - 강조색: 하늘색(accent) 하나만. 버튼·링크·표시점에만 쓴다. 그라데이션 글자, 빛 번짐 금지.
+   - 모서리: 버튼·입력 8px(rounded-lg), 카드·사진 12px(rounded-xl). 다른 값 쓰지 않음.
+   - 글꼴: Pretendard 하나 (layout.jsx 에서 --font-sans 로 연결).
+   - 아이콘: Phosphor 하나 (굵기 regular).
+   - 긴 줄표(—) 쓰지 않음.
+   ========================================================================== */
+
+@theme {
+  --color-bg: #0b0d10;
+  --color-bg-2: #101318;
+  --color-surface: #151920;
+  --color-surface-2: #1b2029;
+  --color-line: rgb(255 255 255 / 0.08);
+  --color-line-strong: rgb(255 255 255 / 0.16);
+  --color-ink: #eceef1;
+  --color-ink-2: #a9b0bb;
+  --color-ink-3: #77808c;
+  --color-accent: #3cc4dc;
+  --color-accent-strong: #66d3e6;
+  --color-accent-ink: #061317;
+  --color-accent-wash: rgb(60 196 220 / 0.1);
+  --color-warn: #e8a54b;
+
+  --font-sans: var(--font-pretendard), "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+    "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+}
+
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
 body {
-  background-color: #09090b; /* zinc-950 */
-  color: #fff;
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss06";
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #0a0a0a;
-}
-::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
+::selection {
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
 }
 
-/* Animation keyframes */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
 }
 
-.animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
-.animate-fade-in { animation: fadeIn 1s ease-out forwards; }
-.animate-pulse-slow { animation: pulse 3s ease-in-out infinite; }
-.animate-float { animation: float 6s ease-in-out infinite; }
+/* 숫자는 고정폭으로 맞춰 정렬 */
+.tabular { font-variant-numeric: tabular-nums; }
 
-.delay-100 { animation-delay: 0.1s; }
-.delay-200 { animation-delay: 0.2s; }
-.delay-300 { animation-delay: 0.3s; }
-.delay-400 { animation-delay: 0.4s; }
-.delay-500 { animation-delay: 0.5s; }
-
-/* Gradient text */
-.gradient-text {
-  background: linear-gradient(135deg, #00d4ff 0%, #0099ff 50%, #00d4ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* 스크롤하면 부드럽게 나타나기 (JS 가 켜졌고, 움직임 줄이기 설정이 아닐 때만) */
+@media (prefers-reduced-motion: no-preference) {
+  .js .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--d, 0ms);
+  }
+  .js .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
 }
 
-/* Glassmorphism card */
-.glass-card {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+/* 버튼 누를 때 살짝 눌리는 느낌 */
+.press { transition: transform 0.15s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease; }
+.press:active { transform: translateY(1px) scale(0.985); }
+
+/* 사진 위 어둡게 깔기 (글자 대비 확보) */
+.img-shade { position: relative; }
+.img-shade::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgb(11 13 16 / 0) 35%, rgb(11 13 16 / 0.85) 100%);
+  pointer-events: none;
 }
 
-/* Glow effect */
-.glow { box-shadow: 0 0 40px rgba(0, 212, 255, 0.15); }
+/* FAQ 펼침 표시 */
+details > summary { list-style: none; }
+details > summary::-webkit-details-marker { display: none; }
+details[open] .faq-icon { transform: rotate(45deg); }
 
-/* Grid background pattern */
-.grid-bg {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 50px 50px;
-}
-
-/* 본문(블로그/솔루션) 가독성 보조 */
+/* 본문(블로그·솔루션) 가독성 */
 .prose-gn p { line-height: 1.85; }
+
+/* 스크롤바 */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: #262b33; border-radius: 8px; border: 2px solid var(--color-bg); }
+::-webkit-scrollbar-thumb:hover { background: #343a44; }

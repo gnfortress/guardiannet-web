@@ -1,8 +1,15 @@
 'use client'
 
 import { useState } from 'react'
+import { CheckCircleIcon, WarningCircleIcon } from '@phosphor-icons/react'
 import { COMPANY } from '@/lib/site'
-import { CheckIcon } from './Icons'
+
+// 기존 폼 필드(회사명·담당자명·이메일·문의내용)와 순서, Formspree 주소는 그대로 유지한다.
+const FIELDS = [
+  { name: 'company', label: '회사명', type: 'text', autoComplete: 'organization', hint: '예: (주)가디언넷' },
+  { name: 'name', label: '담당자명', type: 'text', autoComplete: 'name', hint: '예: 홍길동 / 보안팀' },
+  { name: 'email', label: '이메일', type: 'email', autoComplete: 'email', hint: '답변 받으실 주소' },
+]
 
 export default function ContactForm() {
   const [status, setStatus] = useState('idle') // idle | submitting | success | error
@@ -12,11 +19,13 @@ export default function ContactForm() {
 
   const onSubmit = async (e) => {
     e.preventDefault()
+    // 자동 입력 봇 거르기 (사람에게는 보이지 않는 칸)
+    if (e.currentTarget.elements._gotcha?.value) return
     setStatus('submitting')
     try {
       const res = await fetch(COMPANY.formspree, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
           회사명: form.company,
           담당자명: form.name,
@@ -37,53 +46,80 @@ export default function ContactForm() {
 
   if (status === 'success') {
     return (
-      <div className="glass-card p-8 rounded-2xl flex flex-col items-center justify-center min-h-[400px]">
-        <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mb-4 text-green-400">
-          <CheckIcon className="w-8 h-8" />
-        </div>
-        <h3 className="text-xl font-bold text-white mb-2">문의가 접수되었습니다</h3>
-        <p className="text-zinc-400 text-center mb-6">빠른 시일 내에 답변 드리겠습니다.</p>
+      <div className="flex min-h-[420px] flex-col items-start justify-center rounded-xl border border-line bg-surface p-8 md:p-10" role="status">
+        <CheckCircleIcon size={40} weight="fill" className="text-accent" aria-hidden="true" />
+        <h2 className="mt-5 text-[22px] font-bold">문의가 접수되었습니다</h2>
+        <p className="mt-2 text-[15px] leading-relaxed text-ink-2">담당자가 확인한 뒤 남겨 주신 이메일로 답변드리겠습니다.</p>
         <button
+          type="button"
           onClick={() => setStatus('idle')}
-          className="px-6 py-2 border border-zinc-700 hover:border-zinc-500 text-white rounded-lg transition-colors"
+          className="press mt-8 inline-flex h-11 items-center rounded-lg border border-line-strong px-5 text-[15px] font-semibold text-ink hover:border-ink-2"
         >
-          새 문의하기
+          새 문의 작성
         </button>
       </div>
     )
   }
 
   const inputCls =
-    'w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-lg focus:outline-none focus:border-cyan-500 text-white placeholder-zinc-500 transition-colors'
+    'w-full rounded-lg border border-line-strong bg-bg px-4 py-3 text-[15px] text-ink placeholder:text-ink-3 transition-colors focus:border-accent focus:outline-none'
 
   return (
-    <div className="glass-card p-8 rounded-2xl">
-      <form onSubmit={onSubmit} className="space-y-6">
-        <div>
-          <label className="block text-sm font-medium text-zinc-300 mb-2">회사명</label>
-          <input type="text" name="company" value={form.company} onChange={onChange} required className={inputCls} placeholder="회사명을 입력하세요" />
+    <div className="rounded-xl border border-line bg-surface p-6 md:p-8">
+      <form onSubmit={onSubmit} className="grid gap-5" noValidate={false}>
+        {FIELDS.map((f) => (
+          <div key={f.name} className="grid gap-2">
+            <label htmlFor={`f-${f.name}`} className="text-[14px] font-semibold text-ink">
+              {f.label}
+            </label>
+            <input
+              id={`f-${f.name}`}
+              type={f.type}
+              name={f.name}
+              value={form[f.name]}
+              onChange={onChange}
+              required
+              autoComplete={f.autoComplete}
+              className={inputCls}
+              placeholder={f.hint}
+            />
+          </div>
+        ))}
+        <div className="grid gap-2">
+          <label htmlFor="f-message" className="text-[14px] font-semibold text-ink">
+            문의내용
+          </label>
+          <textarea
+            id="f-message"
+            name="message"
+            value={form.message}
+            onChange={onChange}
+            required
+            rows={5}
+            aria-describedby="f-message-help"
+            className={`${inputCls} resize-y`}
+          />
+          <p id="f-message-help" className="text-[13px] text-ink-3">
+            검토 중인 솔루션, 서버·단말 규모, 클라우드 사용 여부, 희망 일정을 적어 주시면 더 정확히 제안드립니다.
+          </p>
         </div>
-        <div>
-          <label className="block text-sm font-medium text-zinc-300 mb-2">담당자명</label>
-          <input type="text" name="name" value={form.name} onChange={onChange} required className={inputCls} placeholder="담당자명을 입력하세요" />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-zinc-300 mb-2">이메일</label>
-          <input type="email" name="email" value={form.email} onChange={onChange} required className={inputCls} placeholder="이메일을 입력하세요" />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-zinc-300 mb-2">문의내용</label>
-          <textarea name="message" value={form.message} onChange={onChange} required rows={4} className={`${inputCls} resize-none`} placeholder="도입을 검토 중인 솔루션, 환경, 일정 등을 적어주세요" />
-        </div>
+
+        {/* 봇 차단용 숨김 칸 */}
+        <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+
         {status === 'error' && (
-          <p className="text-red-400 text-sm">전송에 실패했습니다. 잠시 후 다시 시도하거나 {COMPANY.emails.sales} 로 문의해 주세요.</p>
+          <p className="flex items-start gap-2 text-[14px] text-warn" role="alert">
+            <WarningCircleIcon size={18} className="mt-0.5 shrink-0" aria-hidden="true" />
+            전송하지 못했습니다. 잠시 후 다시 시도하시거나 {COMPANY.emails.sales} 로 메일 주세요.
+          </p>
         )}
+
         <button
           type="submit"
           disabled={status === 'submitting'}
-          className="w-full py-4 bg-cyan-500 hover:bg-cyan-400 disabled:bg-cyan-500/50 disabled:cursor-not-allowed text-black font-semibold rounded-lg transition-colors"
+          className="press mt-1 inline-flex h-12 items-center justify-center rounded-lg bg-accent text-base font-semibold text-accent-ink hover:bg-accent-strong disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {status === 'submitting' ? '전송 중...' : '문의 보내기'}
+          {status === 'submitting' ? '보내는 중…' : '문의 보내기'}
         </button>
       </form>
     </div>

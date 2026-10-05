@@ -1,34 +1,34 @@
-import Link from 'next/link'
-import { ArrowRightIcon } from './Icons'
+import { CONTACT_LABEL, COMPANY } from '@/lib/site'
+import { ButtonLink, Container } from './ui'
 
+// 페이지 끝 문의 띠. 카드·빛 효과 없이 위아래 선으로만 구분한다.
 export default function CtaBand({
   title = '보안 도입을 검토 중이신가요?',
-  subtitle = '환경과 일정을 알려주시면 구성·견적을 무료로 제안드립니다.',
-  primary = { label: '무료 상담·견적 문의', href: '/contact' },
+  subtitle = '환경과 일정을 알려 주시면 구성과 견적을 무료로 제안합니다.',
   secondary,
 }) {
   return (
-    <section className="px-6 py-20">
-      <div className="max-w-5xl mx-auto glass-card glow rounded-3xl p-10 md:p-14 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">{title}</h2>
-        <p className="text-zinc-400 mb-8 max-w-2xl mx-auto">{subtitle}</p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
-            href={primary.href}
-            className="px-8 py-4 bg-cyan-500 hover:bg-cyan-400 text-black font-semibold rounded-lg transition-all hover:shadow-lg hover:shadow-cyan-500/25 inline-flex items-center justify-center gap-2"
-          >
-            {primary.label} <ArrowRightIcon />
-          </Link>
-          {secondary && (
-            <Link
-              href={secondary.href}
-              className="px-8 py-4 border border-zinc-700 hover:border-zinc-500 text-white rounded-lg transition-colors"
-            >
+    <section className="border-t border-line bg-bg-2">
+      <Container className="grid gap-8 py-16 md:grid-cols-12 md:items-center md:py-20">
+        <div className="reveal md:col-span-7">
+          <h2 className="text-[28px] font-bold leading-[1.25] tracking-[-0.02em] text-balance md:text-[36px]">{title}</h2>
+          <p className="mt-3 max-w-[52ch] text-[16px] leading-relaxed text-ink-2">{subtitle}</p>
+        </div>
+        <div className="reveal flex flex-col gap-3 sm:flex-row md:col-span-5 md:justify-end" style={{ '--d': '80ms' }}>
+          <ButtonLink href="/contact" arrow>
+            {CONTACT_LABEL}
+          </ButtonLink>
+          {secondary ? (
+            <ButtonLink href={secondary.href} variant="secondary">
               {secondary.label}
-            </Link>
+            </ButtonLink>
+          ) : (
+            <ButtonLink href={`mailto:${COMPANY.emails.sales}`} variant="secondary">
+              {COMPANY.emails.sales}
+            </ButtonLink>
           )}
         </div>
-      </div>
+      </Container>
     </section>
   )
 }

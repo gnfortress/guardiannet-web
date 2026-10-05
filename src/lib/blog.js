@@ -7,7 +7,7 @@
 export const POSTS = [
   {
     slug: 'deep-security-license-guide',
-    title: 'Deep Security 라이선스 가이드 — 구독형 vs 영구형',
+    title: 'Deep Security 라이선스 가이드: 구독형 vs 영구형',
     description:
       'Deep Security 라이선스가 어떻게 산정되는지, 구독형(SaaS)과 영구형의 차이, 갱신·증설 시 점검할 포인트를 정리합니다.',
     date: '2026-06-18',
@@ -33,7 +33,7 @@ export const POSTS = [
   },
   {
     slug: 'what-is-cnapp',
-    title: 'CNAPP란 무엇인가 — 클라우드 통합 보안의 큰 그림',
+    title: 'CNAPP란 무엇인가: 클라우드 통합 보안의 큰 그림',
     description:
       'CNAPP가 무엇이고 CWPP·CSPM·CIEM과 어떤 관계인지, 단계적으로 도입하는 현실적인 경로를 설명합니다.',
     date: '2026-06-18',
@@ -100,7 +100,7 @@ export const POSTS = [
   },
   {
     slug: 'financial-cloud-security-guide',
-    title: '금융권 클라우드 보안 가이드 — 무엇을 갖춰야 하나',
+    title: '금융권 클라우드 보안 가이드: 무엇을 갖춰야 하나',
     description:
       '금융 분야 클라우드·SaaS 활용이 늘면서 필요한 보안 통제와, 규제 적합성을 유지하며 전환하는 방법을 정리합니다.',
     date: '2026-06-18',
@@ -148,7 +148,7 @@ export const POSTS = [
   },
   {
     slug: 'deep-security-maintenance-guide',
-    title: 'Deep Security 유지보수·운영대행 — 무엇을, 어떻게 받나',
+    title: 'Deep Security 유지보수·운영대행: 무엇을, 어떻게 받나',
     description:
       'Deep Security 유지보수 계약에 포함되는 항목과 운영대행(Managed)의 차이, 타사가 구축한 환경을 이관받는 방법까지 정리합니다.',
     date: '2026-06-18',
@@ -195,7 +195,7 @@ export const POSTS = [
   },
   {
     slug: 'server-ransomware-protection',
-    title: '서버 랜섬웨어, 어떻게 막나 — 다층 방어 전략',
+    title: '서버 랜섬웨어, 어떻게 막나: 다층 방어 전략',
     description:
       '서버를 노리는 랜섬웨어의 침투 경로와, 안티멀웨어·Host IPS·무결성 모니터링·EDR을 결합한 다층 방어 전략을 정리합니다.',
     date: '2026-06-18',
@@ -271,7 +271,7 @@ export const POSTS = [
   },
   {
     slug: 'edr-vs-xdr',
-    title: 'EDR과 XDR의 차이 — 우리 조직은 무엇이 필요한가',
+    title: 'EDR과 XDR의 차이: 우리 조직은 무엇이 필요한가',
     description:
       'EDR과 XDR이 어떻게 다른지, 엔드포인트 단일 가시성에서 전 계층 상관분석으로 확장하는 기준을 정리합니다.',
     date: '2026-06-18',
@@ -279,9 +279,9 @@ export const POSTS = [
     keywords: ['EDR', 'XDR', 'EDR XDR 차이', 'Vision One', '엔드포인트 보안'],
     body: [
       { p: '보안 시장에서 EDR과 XDR이 자주 함께 언급되지만, 둘은 범위가 다릅니다. 핵심은 "어디까지 보느냐"입니다.' },
-      { h2: 'EDR — 엔드포인트 가시성' },
+      { h2: 'EDR: 엔드포인트 가시성' },
       { p: 'EDR(Endpoint Detection and Response)은 단말·서버의 행위를 기록·분석해 침해와 후속 활동을 탐지하고 대응합니다. 가시성의 범위는 엔드포인트입니다.' },
-      { h2: 'XDR — 전 계층 상관분석' },
+      { h2: 'XDR: 전 계층 상관분석' },
       { p: 'XDR(eXtended Detection and Response)은 엔드포인트에 더해 이메일·서버·네트워크·클라우드의 이벤트를 함께 상관분석합니다. 흩어진 알럿을 하나의 공격 스토리로 묶어, 분석가가 여러 콘솔을 오가지 않고 전체 맥락을 파악할 수 있습니다.' },
       { h2: '무엇부터?' },
       { ul: [
@@ -295,7 +295,7 @@ export const POSTS = [
   },
   {
     slug: 'what-is-deep-security',
-    title: 'Trend Micro Deep Security란 무엇인가 — 서버 보안 입문',
+    title: 'Trend Micro Deep Security란 무엇인가: 서버 보안 입문',
     description:
       'Deep Security가 무엇이고 어떤 위협을 막는지, 백신·방화벽과 무엇이 다른지 핵심만 정리합니다.',
     date: '2026-06-02',
@@ -342,7 +342,7 @@ export const POSTS = [
   },
   {
     slug: 'cwpp-vs-cnapp',
-    title: 'CWPP와 CNAPP의 차이 — 무엇부터 도입해야 할까',
+    title: 'CWPP와 CNAPP의 차이: 무엇부터 도입해야 할까',
     description:
       '클라우드 보안 용어 CWPP와 CNAPP가 어떻게 다른지, 우리 조직은 무엇부터 시작해야 하는지 정리합니다.',
     date: '2026-06-09',
@@ -350,9 +350,9 @@ export const POSTS = [
     keywords: ['CWPP', 'CNAPP', '클라우드 워크로드 보안', '클라우드 보안'],
     body: [
       { p: '클라우드 보안 시장에는 CWPP, CSPM, CIEM, CNAPP 같은 약어가 쏟아집니다. 핵심만 보면 구분이 어렵지 않습니다.' },
-      { h2: 'CWPP — 실행 중인 워크로드 보호' },
+      { h2: 'CWPP: 실행 중인 워크로드 보호' },
       { p: 'CWPP(Cloud Workload Protection Platform)는 지금 돌아가고 있는 서버·컨테이너 워크로드를 멀웨어·침입·취약점으로부터 보호합니다. Trend Micro Deep Security가 대표적입니다.' },
-      { h2: 'CNAPP — 통합 클라우드 보안' },
+      { h2: 'CNAPP: 통합 클라우드 보안' },
       { p: 'CNAPP(Cloud-Native Application Protection Platform)는 CWPP에 더해 클라우드 설정 점검(CSPM), 권한 분석(CIEM), 코드·이미지 보안(Shift-Left)을 하나로 묶은 상위 개념입니다.' },
       { h2: '무엇부터?' },
       { p: '대부분의 조직은 "실행 중인 워크로드 보호(CWPP)"가 가장 시급합니다. 운영이 안정되면 설정 점검과 권한 분석을 더해 CNAPP 수준으로 확장하는 단계적 접근이 비용 대비 효과적입니다.' },
@@ -361,7 +361,7 @@ export const POSTS = [
   },
   {
     slug: 'isms-server-security-checklist',
-    title: 'ISMS-P 서버 보안 체크리스트 — 핵심 통제 항목',
+    title: 'ISMS-P 서버 보안 체크리스트: 핵심 통제 항목',
     description:
       'ISMS-P 인증 심사에서 자주 지적되는 서버 보안 통제 항목과 대응 방법을 체크리스트로 정리합니다.',
     date: '2026-06-12',
@@ -384,7 +384,7 @@ export const POSTS = [
   },
   {
     slug: 'financial-saas-edr-vision-one',
-    title: '금융권 SaaS 도입과 EDR — Vision One이 떠오르는 이유',
+    title: '금융권 SaaS 도입과 EDR: Vision One이 떠오르는 이유',
     description:
       '금융 분야 SaaS·클라우드 활용 확대 흐름 속에서 EDR/XDR이 주목받는 배경과, Trend Micro Vision One 도입 시 점검할 포인트를 정리합니다.',
     date: '2026-06-17',

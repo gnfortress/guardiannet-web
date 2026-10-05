@@ -1,4 +1,6 @@
 import './globals.css'
+import localFont from 'next/font/local'
+import Reveal from '@/components/Reveal'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import JsonLd from '@/components/JsonLd'
@@ -10,6 +12,14 @@ import {
   GOOGLE_SITE_VERIFICATION,
   NAVER_SITE_VERIFICATION,
 } from '@/lib/site'
+
+// Pretendard (KS X 1001 한글 2,350자 + 영문·기호 + 사이트 문구에 쓰인 글자만 남긴 가변 폰트)
+const pretendard = localFont({
+  src: './fonts/PretendardVariable-Subset.woff2',
+  weight: '100 900',
+  display: 'swap',
+  variable: '--font-pretendard',
+})
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -27,6 +37,8 @@ export const metadata = {
     'Deep Security 구축',
     'Deep Security 유지보수',
     'Deep Discovery',
+    'Vision One',
+    'TippingPoint',
     'APT 대응',
     'CWPP',
     '클라우드 워크로드 보안',
@@ -67,7 +79,7 @@ export const metadata = {
 }
 
 export const viewport = {
-  themeColor: '#09090b',
+  themeColor: '#0b0d10',
   width: 'device-width',
   initialScale: 1,
 }
@@ -111,6 +123,8 @@ const orgJsonLd = {
   knowsAbout: [
     'Trend Micro Deep Security',
     'Trend Micro Deep Discovery',
+    'Trend Micro Vision One',
+    'Trend Micro TippingPoint',
     'CWPP',
     'APT 대응',
     '클라우드 워크로드 보안',
@@ -128,13 +142,18 @@ const websiteJsonLd = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="ko">
-      <body className="min-h-screen bg-zinc-950 text-white antialiased">
+    <html lang="ko" className={pretendard.variable} suppressHydrationWarning>
+      <head>
+        {/* JS 가 켜진 경우에만 스크롤 등장 효과를 준비 (JS 가 없으면 내용이 그대로 보임) */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+      </head>
+      <body className="min-h-screen bg-bg text-ink antialiased">
         <JsonLd data={orgJsonLd} />
         <JsonLd data={websiteJsonLd} />
         <Nav />
         <main className="pt-16">{children}</main>
         <Footer />
+        <Reveal />
       </body>
     </html>
   )

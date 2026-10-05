@@ -14,11 +14,24 @@ SEO를 고려해 재구축한 가디언넷 회사 웹사이트입니다.
 - `/` 홈
 - `/about` 회사소개
 - `/solutions` 솔루션 목록
-- `/solutions/deep-security` · `/vision-one`(EDR/XDR·금융 SaaS) · `/deep-discovery` · `/cwpp` · `/isms` · `/financial` 랜딩
+- `/solutions/deep-security` · `/vision-one`(EDR/XDR·금융 SaaS) · `/deep-discovery` · `/tippingpoint`(IPS) · `/cwpp` · `/isms` · `/financial` 랜딩
 - `/cases` 구축사례(익명)
 - `/blog`, `/blog/[slug]` 블로그 (롱테일 SEO)
 - `/contact` 문의(기존 Formspree 유지)
 - `/sitemap.xml`, `/robots.txt` 자동 생성
+
+## 디자인 규칙 (2026-10 Taste Skill 개편)
+- 어두운 단일 테마, 강조색은 하늘색 하나(`src/app/globals.css`의 `@theme`).
+- 모서리: 버튼·입력 8px, 카드·사진 12px. 글꼴 Pretendard 하나(`src/app/fonts`, 한글 2,350자 서브셋). 아이콘 Phosphor 하나.
+- 섹션 머리말(작은 영문 라벨), 그라데이션 글자, 빛 번짐 효과, 긴 줄표(—)는 쓰지 않습니다.
+- 모든 문의 버튼 문구는 `문의하기` 하나(`CONTACT_LABEL`).
+- 사진: `public/img/*.webp` (AI 생성 이미지, 글자·로고 없음).
+- 솔루션 페이지 소제목은 질문형, 첫 문장이 답. 공식 자료 수치는 `sources`에 출처를 남깁니다.
+
+## 실행·올리기·배포 (더블클릭)
+- `시작하기.bat` : 필요한 파일 설치 후 http://localhost:3000 을 엽니다.
+- `push-to-github.bat` : 바뀐 내용을 GitHub(gnfortress/guardiannet-web)에 올립니다.
+- `deploy.bat` : 사이트를 빌드해 Firebase Hosting(guardiannet.co.kr)에 배포합니다.
 
 ## 개발 / 빌드 / 배포
 ```bash

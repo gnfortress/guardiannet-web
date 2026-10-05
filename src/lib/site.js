@@ -46,16 +46,18 @@ export const METRICS = {
 export const DEFAULT_TITLE =
   '가디언넷 | Trend Micro Deep Security · APT 대응 보안 전문기업'
 export const DEFAULT_DESCRIPTION =
-  '클라우드 보안과 APT 대응 국내 최다 구축 실적. Trend Micro Deep Security 구축·유지보수·운영, Deep Discovery APT 대응 전문. 5,000+ 워크로드, 150+ APT 고객사. 금융·공공이 선택한 보안 파트너 가디언넷.'
+  '클라우드 보안과 APT 대응 국내 최다 구축 실적. Trend Micro Deep Security·Vision One·Deep Discovery·TippingPoint 구축·유지보수·운영 전문. 5,000+ 워크로드, 150+ APT 고객사. 금융·공공이 선택한 보안 파트너 가디언넷.'
 
-// 사이트 네비게이션 (헤더/푸터/사이트맵 공통)
+// 모든 "문의" 버튼은 이 문구 하나만 쓴다 (같은 목적의 버튼 문구를 섞지 않음)
+export const CONTACT_LABEL = '문의하기'
+
+// 사이트 네비게이션
+// - 헤더: 회사소개 · 솔루션(펼침) · 구축사례 · 블로그 · 문의하기
+// - 솔루션 펼침 메뉴의 항목은 lib/solutions.js 에서 가져온다 (Nav.jsx)
 export const NAV = [
   { label: '회사소개', href: '/about' },
-  { label: 'Deep Security', href: '/solutions/deep-security' },
-  { label: 'Vision One', href: '/solutions/vision-one' },
-  { label: 'APT 대응', href: '/solutions/deep-discovery' },
-  { label: 'CWPP', href: '/solutions/cwpp' },
+  { label: '솔루션', href: '/solutions', menu: true },
   { label: '구축사례', href: '/cases' },
   { label: '블로그', href: '/blog' },
-  { label: '문의', href: '/contact' },
+  { label: CONTACT_LABEL, href: '/contact', cta: true },
 ]

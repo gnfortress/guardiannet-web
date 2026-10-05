@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Container, ButtonLink } from '@/components/ui'
 
 export const metadata = {
   title: '페이지를 찾을 수 없습니다',
@@ -7,14 +7,18 @@ export const metadata = {
 
 export default function NotFound() {
   return (
-    <section className="px-6 py-32 max-w-2xl mx-auto text-center">
-      <div className="text-7xl font-bold gradient-text mb-4">404</div>
-      <h1 className="text-2xl font-bold mb-3">페이지를 찾을 수 없습니다</h1>
-      <p className="text-zinc-400 mb-8">요청하신 페이지가 이동되었거나 존재하지 않습니다.</p>
-      <div className="flex flex-col sm:flex-row gap-3 justify-center">
-        <Link href="/" className="px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-black font-semibold rounded-lg transition-colors">홈으로</Link>
-        <Link href="/solutions" className="px-6 py-3 border border-zinc-700 hover:border-zinc-500 rounded-lg transition-colors">솔루션 보기</Link>
-      </div>
+    <section>
+      <Container className="flex min-h-[60vh] flex-col justify-center py-24">
+        <div className="text-[64px] font-bold tracking-[-0.04em] text-ink-3 tabular md:text-[88px]">404</div>
+        <h1 className="mt-2 text-[28px] font-bold tracking-[-0.02em] md:text-[34px]">페이지를 찾을 수 없습니다</h1>
+        <p className="mt-3 text-[16px] text-ink-2">요청하신 페이지가 옮겨졌거나 없어졌습니다.</p>
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <ButtonLink href="/">홈으로</ButtonLink>
+          <ButtonLink href="/solutions" variant="secondary">
+            솔루션 보기
+          </ButtonLink>
+        </div>
+      </Container>
     </section>
   )
 }

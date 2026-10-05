@@ -1,52 +1,62 @@
+import { MapPinIcon, EnvelopeSimpleIcon } from '@phosphor-icons/react/dist/ssr'
 import { COMPANY } from '@/lib/site'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import ContactForm from '@/components/ContactForm'
-import { MapPinIcon, MailIcon } from '@/components/Icons'
+import { Container } from '@/components/ui'
 
 export const metadata = {
-  title: '문의하기 — 무료 보안 진단·견적',
+  title: '문의하기: 무료 보안 진단·견적',
   description:
-    'Trend Micro Deep Security·Deep Discovery 도입, 유지보수, 라이선스 견적 문의. 환경을 알려주시면 구성과 견적을 무료로 제안드립니다. 가디언넷.',
+    'Trend Micro Deep Security·Vision One·Deep Discovery·TippingPoint 도입, 유지보수, 라이선스 견적 문의. 환경을 알려 주시면 구성과 견적을 무료로 제안합니다. 가디언넷.',
   alternates: { canonical: '/contact' },
 }
 
 export default function ContactPage() {
   return (
-    <section className="px-6 pt-16 pb-24 max-w-7xl mx-auto">
-      <Breadcrumbs items={[{ name: '홈', href: '/' }, { name: '문의', href: '/contact' }]} />
-      <div className="grid md:grid-cols-2 gap-12 mt-8">
-        <div>
-          <h1 className="text-4xl font-bold mb-6">문의하기</h1>
-          <p className="text-zinc-400 mb-8 leading-relaxed">
-            보안 솔루션 도입, 유지보수, 라이선스 견적 등 무엇이든 문의해 주세요.
-            도입을 검토 중인 솔루션과 환경(워크로드 수·클라우드·일정)을 함께 적어주시면
-            더 정확한 제안이 가능합니다.
+    <section>
+      <Container className="grid gap-12 py-12 md:py-16 lg:grid-cols-12 lg:gap-14">
+        <div className="lg:col-span-5">
+          <Breadcrumbs items={[{ name: '홈', href: '/' }, { name: '문의하기', href: '/contact' }]} />
+          <h1 className="mt-6 text-[34px] font-bold tracking-[-0.03em] md:text-[46px]">문의하기</h1>
+          <p className="mt-5 max-w-[44ch] text-[16.5px] leading-relaxed text-ink-2">
+            도입, 유지보수, 라이선스 견적 등 무엇이든 남겨 주세요. 검토 중인 솔루션과 환경을 함께 적어 주시면 더 정확히 제안드립니다.
           </p>
 
-          <div className="space-y-6">
-            <div className="flex items-start gap-4">
-              <div className="p-3 bg-cyan-500/10 rounded-lg text-cyan-400"><MapPinIcon /></div>
+          <dl className="mt-10 divide-y divide-line border-y border-line">
+            <div className="flex gap-4 py-5">
+              <MapPinIcon size={22} className="mt-0.5 shrink-0 text-accent" aria-hidden="true" />
               <div>
-                <div className="font-medium text-white mb-1">주소</div>
-                <div className="text-zinc-400">{COMPANY.address}</div>
+                <dt className="text-[14px] font-semibold text-ink">주소</dt>
+                <dd className="mt-1 text-[15px] leading-relaxed text-ink-2">{COMPANY.address}</dd>
               </div>
             </div>
-            <div className="flex items-start gap-4">
-              <div className="p-3 bg-cyan-500/10 rounded-lg text-cyan-400"><MailIcon className="w-6 h-6" /></div>
+            <div className="flex gap-4 py-5">
+              <EnvelopeSimpleIcon size={22} className="mt-0.5 shrink-0 text-accent" aria-hidden="true" />
               <div>
-                <div className="font-medium text-white mb-1">이메일</div>
-                <div className="text-zinc-400 space-y-1">
-                  <p>견적·유지보수: <a href={`mailto:${COMPANY.emails.sales}`} className="text-cyan-400 hover:underline">{COMPANY.emails.sales}</a></p>
-                  <p>기술문의: <a href={`mailto:${COMPANY.emails.tech}`} className="text-cyan-400 hover:underline">{COMPANY.emails.tech}</a></p>
-                  <p>클라우드 서비스: <a href={`mailto:${COMPANY.emails.service}`} className="text-cyan-400 hover:underline">{COMPANY.emails.service}</a></p>
-                </div>
+                <dt className="text-[14px] font-semibold text-ink">이메일</dt>
+                <dd className="mt-1 space-y-1 text-[15px] text-ink-2">
+                  {[
+                    ['견적·유지보수', COMPANY.emails.sales],
+                    ['기술문의', COMPANY.emails.tech],
+                    ['클라우드 서비스', COMPANY.emails.service],
+                  ].map(([k, v]) => (
+                    <p key={v}>
+                      <span className="inline-block w-28 text-ink-3">{k}</span>
+                      <a href={`mailto:${v}`} className="text-accent hover:text-accent-strong hover:underline">
+                        {v}
+                      </a>
+                    </p>
+                  ))}
+                </dd>
               </div>
             </div>
-          </div>
+          </dl>
         </div>
 
-        <ContactForm />
-      </div>
+        <div className="lg:col-span-7">
+          <ContactForm />
+        </div>
+      </Container>
     </section>
   )
 }

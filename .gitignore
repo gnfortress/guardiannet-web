@@ -6,3 +6,8 @@ dist
 .DS_Store
 *.log
 .firebase
+
+# local helpers
+push-to-github.bat
+push-to-github.ps1
+push-log.txt
